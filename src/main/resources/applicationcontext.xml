@@ -6,13 +6,13 @@
 
 	<bean id="messageService" class="akm.spring.pojo.MessageServiceImpl">
 	</bean>
-	
+
 	<bean id="messagePrinter" class="akm.spring.pojo.MessagePrinter">
 		<property name="messageService" ref="messageService" />
 	</bean>
-	
-	<bean id="application" class="akm.spring.pojo.Application" init-method="init">
+
+	<bean id="application" class="akm.spring.pojo.Application"
+		init-method="init">
 		<property name="messagePrinter" ref="messagePrinter" />
 	</bean>
-
 </beans>

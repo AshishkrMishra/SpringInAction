@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="SlayDrangonQuest" class="akm.spring.di.example.darknight.impls.SlayDrangonQuest">
+		<constructor-arg value="#{T(System).out}" />
+	</bean>
+	
+	<bean id="BraveDarkKnight" class="akm.spring.di.example.darknight.impls.BraveDarkKnight">
+		<constructor-arg  ref="SlayDrangonQuest" />
+	</bean>
+	
+	<bean id="DarkGameStarter"  class="akm.spring.di.example.darknight.DarkGameStarter" init-method="startGame">
+	<property name="knight" ref="BraveDarkKnight"></property>
+	</bean>
+	
+	
+</beans>

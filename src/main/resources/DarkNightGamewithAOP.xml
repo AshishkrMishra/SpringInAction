@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+	http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="SlayDrangonQuest" class="akm.spring.di.example.darknight.impls.SlayDrangonQuest">
+		<constructor-arg value="#{T(System).out}" />
+	</bean>
+
+	<bean id="BraveDarkKnight" class="akm.spring.di.example.darknight.impls.BraveDarkKnight">
+		<constructor-arg ref="SlayDrangonQuest" />
+	</bean>
+
+	<bean id="DarkGameStarter" class="akm.spring.di.example.darknight.DarkGameStarter">
+		<property name="knight" ref="BraveDarkKnight"></property>
+	</bean>
+
+	<bean id="minstrel" class="akm.spring.di.example.darknight.action.Minstrel">
+		<property name="stream" value="#{T(System).out}" />
+	</bean>
+
+	<aop:config>
+		<aop:aspect ref="minstrel">
+			<aop:pointcut id="embark" expression="execution(* *.emarkOnQuest(..))" />
+			<aop:before pointcut-ref="embark" method="singBeforeQuest" />
+			<aop:after pointcut-ref="embark" method="singAfterQuest" />
+		</aop:aspect>
+	</aop:config>
+
+</beans>
